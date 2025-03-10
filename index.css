@@ -18,6 +18,15 @@ body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    user-select: none;
+}
+
+#playerInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2rem;
 }
 
 #valueBoard {
@@ -29,9 +38,28 @@ body {
 
 #caseBoard {
     display: grid;
-    width: auto;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(6, 2fr);
     gap: 1rem;
+}
+
+#caseSelection {
+    width: 4rem;
+    height: 4rem;
+    text-align: center;
+    align-content: center;
+    justify-self: center;
+}
+
+#takeBtn {
+    background-color: red;
+    margin: 2rem;
+    padding: 2rem;
+}
+
+#leaveBtn {
+    background-color: green;
+    margin: 2rem;
+    padding: 2rem;
 }
 
 .value {
