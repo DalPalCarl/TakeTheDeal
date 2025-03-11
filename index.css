@@ -38,7 +38,7 @@ body {
 
 #caseBoard {
     display: grid;
-    grid-template-columns: repeat(6, 2fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
 }
 
@@ -73,12 +73,36 @@ body {
 }
 
 .value-revealed {
+    display: flex;
+    flex-direction: row;
+    padding-inline: 5px;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
     background-color: red;
 }
 
 .case {
-    width: 4rem;
-    height: 3rem;
+    width: 5rem;
+    height: 4rem;
+}
+
+.case-revealed {
+    animation: 1000ms ease-in 2000ms disappear forwards
+}
+
+.case-hidden {
+    opacity: 0;
+}
+
+@keyframes disappear {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0%;
+    }
 }
 
 @media (max-width: 1100px){
