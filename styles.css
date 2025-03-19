@@ -1,15 +1,36 @@
+:root {
+    --color-black: #0C0C0C;
+    --color-brown: #481E14;
+    --color-dark-orange: #9B3922;
+    --color-light-orange: #F2613F;
+}
+
 body {
+    font-family: 'Work Sans', sans-serif;
     background-color: gray;
+    padding: .5rem;
+    margin-top: 8rem;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-black);
+    
 }
 
 section {
-    display: inline-block
+    display: inline-block;
 }
 
 #title {
     display: flex;
     justify-content: center;
     margin-bottom: 3rem;
+    font-size: 3rem;
+    color: var(--color-dark-orange);
 }
 
 #instructions {
@@ -28,6 +49,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
 #playerInfo {
@@ -40,6 +62,7 @@ section {
 
 #valueBoard {
     display: grid;
+    margin-left: 3rem;
     grid-template-columns: repeat(2, 1fr);
     row-gap: .2rem;
     column-gap: 1rem;
@@ -48,11 +71,12 @@ section {
 }
 
 #caseBoard {
+    position: relative;
     display: grid;
-    width: 4rem;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(12, minmax(auto, 1rem));
     gap: 1rem;
     height: min-content;
+    justify-content: center;
 }
 
 #caseSelection {
@@ -61,18 +85,25 @@ section {
     text-align: center;
     align-content: center;
     justify-self: center;
+    border-style: groove;
+    border-radius: 5px;
+    border-color: black;
+    border-width: 5px;
 }
 
 #takeBtn {
     background-color: green;
-    margin: 2rem;
-    padding: 2rem;
 }
 
 #leaveBtn {
     background-color: red;
+}
+
+.decision {
+    font-family: 'Work Sans', sans-serif;
     margin: 2rem;
     padding: 2rem;
+    border-radius: 5px;
 }
 
 .value {
@@ -105,11 +136,15 @@ section {
 }
 
 .case {
+    font-family: 'Work Sans', sans-serif;
     width: 5rem;
     height: 4rem;
+    grid-column: span 2;
+    border-radius: 5px;
 }
 
 .case-revealed {
+    font-family: 'Work Sans', sans-serif;
     animation: 1000ms ease-in 2000ms disappear forwards
 }
 
@@ -129,10 +164,22 @@ section {
 
 @media (max-width: 1100px){
     #content {
-        flex-direction: column;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #valueBoard {
+        margin: 0 0 2rem 0;
+        width: auto;
     }
 
     #caseBoard {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(10, minmax(auto, 1rem));
+    }
+}
+
+@media (max-width: 580px) {
+    #caseBoard{
+        grid-template-columns: repeat(6, minmax(auto, 1rem));
     }
 }
