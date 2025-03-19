@@ -9,15 +9,21 @@ const decisionButtons = document.getElementById("decisionButtons");
 const takeDealBtn = document.getElementById("takeBtn");
 const leaveDealBtn = document.getElementById("leaveBtn");
 const SHUFFLEPASSES = 3;
-const CASEPICKNUM = 4
+const CASEPICKNUM = 4;
+const ROUNDS = 10;
 
 let isAnimating = false;
+let isOffering = false;
 let firstCase = true;
 let casePicks = CASEPICKNUM;
+let valueSum = 0;
 let round = 1;
+let roundsLeft = ROUNDS;
 let offer;
 
 let vals = [...values];
+let valsLeft = vals.length;
+
 
 async function loadJson() {
     const response = await fetch("./instructions.json");
@@ -30,14 +36,13 @@ function initButtons() {
     firstCase = true;
     cases.forEach((c) => {
         c.addEventListener("click", () => {
-            if(!isAnimating){
+            if(!isAnimating && !isOffering){
                 handleCaseClick(c);
 
             }
         });
         c.addEventListener("animationend", () => {
             c.style.opacity = 0;
-            c.classList.remove("case-revealed");
             isAnimating = false;
             if(casePicks == 0){
                 bankerOffer();
@@ -59,17 +64,14 @@ function shuffle() {
     }
 }
 
-// Banker's formula: EV * (1+k) * (1-f*r)
-//  EV  - Avg of values left
-//  k   - psychological factor on player's behavior
-//  f   - round number
-//  r   - remaining rounds
+// Banker's formula:
+// factor in:
+// -Volatility: the difference between the largest value and the smallest value
+// -Avg:
 function calculateOffer() {
-    let totalVal = 0;
-    const valsLeft = document.querySelectorAll(".value")
-    valsLeft.forEach(v => totalVal += parseInt(v.id));
-    const ev = Math.round(totalVal/valsLeft.length);
-    return ev;
+    const ev = Math.round(valueSum/valsLeft);
+    const calculation = ev * (round/roundsLeft);
+    return calculation;
 }
 
 
@@ -79,7 +81,10 @@ function startGame() {
     initButtons();
     takeDealBtn.addEventListener("click", takeDeal);
     leaveDealBtn.addEventListener("click", leaveDeal);
-    decisionButtons.style.display = "none";
+    decisionButtons.style.opacity = 0;
+    values.forEach((v) => {
+        valueSum += parseInt(v.id);
+    });
 }
 
 function handleFirstCase(c) {
@@ -99,17 +104,19 @@ function handleCaseClick(c) {
     else{
         values.forEach((v) => {
             if(v.id == vals[c.dataset.casenum - 1].id){
-                // v.classList.replace("value", "value-revealed");
                 flipValue(v);
-                c.innerText = v.id.toLocaleString();
+                c.innerText = v.textContent;
                 c.classList.add("case-revealed");
                 isAnimating = true;
+                valueSum -= parseInt(v.id);
             }
         });
         casePicks--;
+        valsLeft--;
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
     }
     c.setAttribute("disabled", "true");
+
 }
 
 function flipValue(val) {
@@ -121,10 +128,10 @@ function flipValue(val) {
 }
 
 function bankerOffer() {
+    isOffering = true;
     offer = calculateOffer();
     instructionDisplay.innerText = `Banker offers $${offer.toLocaleString()}`;
-    caseBoard.style.opacity = 0;
-    decisionButtons.style.display = "inherit";
+    decisionButtons.style.opacity = 100;
 }
 
 function takeDeal() {
@@ -135,13 +142,14 @@ function takeDeal() {
 
 function leaveDeal() {
     round++;
-    const activeCases = document.querySelectorAll(".case[disabled=true]");
+    isOffering = false;
+    const activeCases = document.querySelectorAll(".case-revealed");
+    console.log(activeCases.length);
     if(activeCases.length == 1){
         revealCase();
     }
     else{
-        caseBoard.style.opacity = 100;
-        decisionButtons.style.display = "none";
+        decisionButtons.style.opacity = 0;
         casePicks = Math.max(Math.floor((26 - activeCases.length) / 5), 1);
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
     }
