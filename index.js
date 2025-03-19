@@ -114,7 +114,7 @@ function handleCaseClick(c) {
 function bankerOffer() {
     offer = calculateOffer();
     instructionDisplay.innerText = `Banker offers $${offer.toLocaleString()}`;
-    caseBoard.style.display = "none";
+    caseBoard.style.opacity = 0;
     decisionButtons.style.display = "inherit";
 }
 
@@ -131,7 +131,7 @@ function leaveDeal() {
         revealCase();
     }
     else{
-        caseBoard.style.display = "grid";
+        caseBoard.style.opacity = 100;
         decisionButtons.style.display = "none";
         casePicks = Math.max(Math.floor((26 - activeCases.length) / 5), 1);
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;

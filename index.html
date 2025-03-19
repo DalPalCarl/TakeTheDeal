@@ -7,10 +7,12 @@
         <title>Take the Deal</title>
     </head>
     <body>
-        <h1 id="title">Take The Deal</h1>
+        <header>
+            <h1 id="title">Take The Deal</h1>
+        </header>
         <h3 id="instructions"></h3>
-        <div id="content">
-            <div id="valueBoard">
+        <main id="content">
+            <section id="valueBoard">
                 <div id="0" class="value"><p>$</p><p>.01</p></div>
                 <div id="1000" class="value"><p>$</p><p>1,000</p></div>
                 <div id="1" class="value"><p>$</p><p>1</p></div>
@@ -37,9 +39,9 @@
                 <div id="750000" class="value"><p>$</p><p>750,000</p></div>
                 <div id="750" class="value"><p>$</p><p>750</p></div>
                 <div id="1000000" class="value"><p>$</p><p>1,000,000</p></div>
-            </div>
-            <div id="playArea">
-                <div id="caseBoard">
+            </section>
+            <section id="playArea">
+                <section id="caseBoard">
                     <button class="case" data-casenum="1">1</button>
                     <button class="case" data-casenum="2">2</button>
                     <button class="case" data-casenum="3">3</button>
@@ -66,17 +68,17 @@
                     <button class="case" data-casenum="24">24</button>
                     <button class="case" data-casenum="25">25</button>
                     <button class="case" data-casenum="26">26</button>
-                </div>
-                <div id="playerInfo">
+                </section>
+                <section id="playerInfo">
                     <div id="decisionButtons">
                         <button id="takeBtn">Take</button>
                         <button id="leaveBtn">Leave</button>
                     </div>
-                </div>
-                <div id="caseSelection">
-                </div>
-            </div>
-        </div>
+                </section>
+                <section id="caseSelection">
+                </section>
+            </section>
+        </main>
         <script src="index.js"></script>
     </body>
 </html>
