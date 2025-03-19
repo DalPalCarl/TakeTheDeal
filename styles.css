@@ -25,6 +25,12 @@ section {
     display: inline-block;
 }
 
+hr {
+    border-style: groove;
+    border-width: 2px;
+    border-color: black;
+}
+
 #title {
     display: flex;
     justify-content: center;
@@ -118,21 +124,11 @@ section {
     border-width: 3px;
     border-color: black;
     border-style: ridge;
+    transition: transform 500ms linear;
 }
 
 .value-revealed {
-    display: flex;
-    flex-direction: row;
-    padding-inline: 5px;
-    height: 40px;
-    justify-content: space-between;
-    align-items: center;
     background-color: red;
-    border-radius: 5px;
-    border-width: 3px;
-    border-color: black;
-    border-style: ridge;
-
 }
 
 .case {
@@ -150,6 +146,10 @@ section {
 
 .case-hidden {
     opacity: 0;
+}
+
+.valueFlip {
+    transform: rotateX(90deg);
 }
 
 @keyframes disappear {

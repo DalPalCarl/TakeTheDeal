@@ -42,7 +42,7 @@ function initButtons() {
             if(casePicks == 0){
                 bankerOffer();
             }
-        });
+        }, {once: true});
     });
 }
 
@@ -99,7 +99,8 @@ function handleCaseClick(c) {
     else{
         values.forEach((v) => {
             if(v.id == vals[c.dataset.casenum - 1].id){
-                v.classList.replace("value", "value-revealed");
+                // v.classList.replace("value", "value-revealed");
+                flipValue(v);
                 c.innerText = v.id.toLocaleString();
                 c.classList.add("case-revealed");
                 isAnimating = true;
@@ -109,6 +110,14 @@ function handleCaseClick(c) {
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
     }
     c.setAttribute("disabled", "true");
+}
+
+function flipValue(val) {
+    val.classList.add("valueFlip");
+    val.addEventListener("transitionend", () => {
+        val.classList.remove("valueFlip");
+        val.classList.add("value-revealed");
+    })
 }
 
 function bankerOffer() {
