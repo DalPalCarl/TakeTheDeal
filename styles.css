@@ -42,9 +42,10 @@ hr {
     color: var(--color-dark-orange);
 }
 
-#instructions {
-    display: flex;
-    justify-content: center;
+#instructionContainer {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    justify-items: center;
 }
 
 #content {
@@ -82,10 +83,66 @@ hr {
 #caseBoard {
     position: relative;
     display: grid;
+    /* display: none; */
     grid-template-columns: repeat(12, minmax(auto, 1rem));
-    gap: 1rem;
+    gap: 1.5rem;
     height: min-content;
     justify-content: center;
+}
+
+#masterCase {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-family: 'Work Sans', sans-serif;
+    width: 30rem;
+    height: 20rem;
+    border: groove 7px black;
+    border-radius: 10px;
+    box-shadow: inset 0 0 3rem 2rem var(--color-dark-grey);
+    overflow: hidden;
+}
+
+#masterCaseInner {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-light-grey);
+    width: 30rem;
+    height: 40rem;
+    z-index: -1;
+    animation: 2000ms ease-in 2000ms revealCase forwards;
+}
+
+#revealCase {
+    position: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    height: 20rem;
+    font-size: 12rem;
+}
+
+#revealValue {
+    position: inherit;
+    display: flex;
+    background-color: rgb(175, 175, 175);
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    height: 20rem;
+    font-size: 5rem;
+}
+
+#masterCase > hr {
+    position: inherit;
+    overflow: hidden;
+    transform: rotateZ(90deg) translateX(9.25rem) translateY(15.1rem);
+    border: solid 4px black;
+    border-radius: 2rem;
+    width: 20rem;
 }
 
 #caseSelection {
@@ -140,6 +197,8 @@ hr {
 
 .case {
     font-family: 'Work Sans', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
     width: 5rem;
     height: 4rem;
     grid-column: span 2;
@@ -168,6 +227,17 @@ hr {
 
     to {
         opacity: 0%;
+    }
+}
+
+@keyframes revealCase {
+
+    50% {
+        transform: translateY(20rem);
+    }
+
+    to {
+        transform: translateY(20rem);
     }
 }
 

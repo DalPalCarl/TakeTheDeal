@@ -8,6 +8,10 @@ const selectedCase = document.getElementById("caseSelection");
 const decisionButtons = document.getElementById("decisionButtons");
 const takeDealBtn = document.getElementById("takeBtn");
 const leaveDealBtn = document.getElementById("leaveBtn");
+const masterCase = document.getElementById("masterCase");
+const masterCaseEdge = document.getElementById("masterCaseEdge");
+const masterCaseNum = document.getElementById("revealCase");
+const masterCaseValue = document.getElementById("revealValue");
 const SHUFFLEPASSES = 3;
 const CASEPICKNUM = 4;
 const ROUNDS = 10;
@@ -23,6 +27,8 @@ let offer;
 
 let vals = [...values];
 let valsLeft = vals.length;
+
+masterCase.style.display = "none";
 
 
 async function loadJson() {
@@ -104,11 +110,18 @@ function handleCaseClick(c) {
     else{
         values.forEach((v) => {
             if(v.id == vals[c.dataset.casenum - 1].id){
+                caseBoard.style.display = "none";
+                masterCase.style.display = "flex";
                 flipValue(v);
+                revealCase(c.id, v.id);
                 c.innerText = v.textContent;
                 c.classList.add("case-revealed");
                 isAnimating = true;
                 valueSum -= parseInt(v.id);
+                masterCase.addEventListener("animationend", () => {
+                    caseBoard.style.display = "grid";
+                    masterCase.style.display = "none";
+                })
             }
         });
         casePicks--;
@@ -116,6 +129,18 @@ function handleCaseClick(c) {
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
     }
     c.setAttribute("disabled", "true");
+    
+}
+
+ 
+function revealCase(caseNum, valueNum) {
+    const c = document.createElement("p");
+    const v = document.createElement("p");
+    c.innerText = caseNum;
+    v.innerText = valueNum;
+    masterCaseNum.appendChild(c);
+    masterCaseValue.appendChild(v);
+    
 
 }
 
@@ -156,10 +181,6 @@ function leaveDeal() {
 
 }
 
-function revealCase() {
-    instructionDisplay.innerText = `Your case contained $${selectedCase.id}`
-
-}
 
 
 startGame();

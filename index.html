@@ -13,7 +13,10 @@
         <header>
             <h1 id="title">Take The Deal</h1>
         </header>
-        <h3 id="instructions"></h3>
+        <div id="instructionContainer">
+            <h3>Values</h3>
+            <h3 id="instructions"></h3>
+        </div>
         <hr>
         <main id="content">
             <section id="valueBoard">
@@ -45,6 +48,13 @@
                 <div id="1000000" class="value"><p>$</p><p>1,000,000</p></div>
             </section>
             <section id="playArea">
+                <div id="masterCase">
+                    <div id="masterCaseInner">
+                        <div id="revealValue"></div>
+                        <div id="revealCase"></div>
+                    </div>
+                    <!-- <hr id="masterCaseEdge"> -->
+                </div>
                 <section id="caseBoard">
                     <button class="case" data-casenum="1">1</button>
                     <button class="case" data-casenum="2">2</button>
