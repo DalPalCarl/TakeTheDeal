@@ -39,7 +39,6 @@ masterCase.addEventListener("animationend", () => {
     if(casePicks == 0){
         bankerOffer();
     }
-    console.log("Animation ended");
 });
 
 masterCase.style.display = "none";
@@ -151,6 +150,7 @@ function flipValue(val) {
 }
 
 function bankerOffer() {
+    caseBoard.classList.add("blur");
     isOffering = true;
     offer = calculateOffer();
     instructionDisplay.innerText = `Banker offers $${offer.toLocaleString()}`;
@@ -172,6 +172,7 @@ function leaveDeal() {
         revealCase();
     }
     else{
+        caseBoard.classList.remove("blur");
         decisionButtons.style.opacity = 0;
         casePicks = Math.max(Math.floor((26 - activeCases.length) / 5), 1);
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;

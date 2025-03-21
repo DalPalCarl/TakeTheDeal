@@ -83,11 +83,11 @@ hr {
 #caseBoard {
     position: relative;
     display: grid;
-    /* display: none; */
     grid-template-columns: repeat(12, minmax(auto, 1rem));
     gap: 1.5rem;
     height: min-content;
     justify-content: center;
+    transition: all 1000ms ease-in;
 }
 
 #masterCase {
@@ -221,6 +221,11 @@ hr {
 
 .valueFlip {
     transform: rotateX(90deg);
+}
+
+.blur {
+    filter: blur(8px);
+    opacity: 50%;
 }
 
 @keyframes revealCase {
