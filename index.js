@@ -140,7 +140,6 @@ function revealCase(caseNum, valueNum) {
     v.innerText = valueNum;
     masterCaseNum.appendChild(c);
     masterCaseValue.appendChild(v);
-    
 
 }
 
