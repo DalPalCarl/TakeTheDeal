@@ -12,6 +12,8 @@ const masterCase = document.getElementById("masterCase");
 const masterCaseEdge = document.getElementById("masterCaseEdge");
 const masterCaseNum = document.getElementById("revealCase");
 const masterCaseValue = document.getElementById("revealValue");
+const mcC = document.getElementById("mcC");
+const mcV = document.getElementById("mcV");
 const SHUFFLEPASSES = 3;
 const CASEPICKNUM = 4;
 const ROUNDS = 10;
@@ -27,9 +29,20 @@ let offer;
 
 let vals = [...values];
 let valsLeft = vals.length;
+let revealedVal;
+
+masterCase.addEventListener("animationend", () => {
+    flipValue(revealedVal);
+    caseBoard.style.display = "grid";
+    masterCase.style.display = "none";
+    isAnimating = false;
+    if(casePicks == 0){
+        bankerOffer();
+    }
+    console.log("Animation ended");
+});
 
 masterCase.style.display = "none";
-
 
 async function loadJson() {
     const response = await fetch("./instructions.json");
@@ -47,13 +60,6 @@ function initButtons() {
 
             }
         });
-        c.addEventListener("animationend", () => {
-            c.style.opacity = 0;
-            isAnimating = false;
-            if(casePicks == 0){
-                bankerOffer();
-            }
-        }, {once: true});
     });
 }
 
@@ -110,18 +116,15 @@ function handleCaseClick(c) {
     else{
         values.forEach((v) => {
             if(v.id == vals[c.dataset.casenum - 1].id){
+                revealedVal = v;
+                c.style.opacity = 0;
                 caseBoard.style.display = "none";
                 masterCase.style.display = "flex";
-                flipValue(v);
-                revealCase(c.id, v.id);
+                revealCase(c.dataset.casenum, v.textContent);
                 c.innerText = v.textContent;
                 c.classList.add("case-revealed");
                 isAnimating = true;
                 valueSum -= parseInt(v.id);
-                masterCase.addEventListener("animationend", () => {
-                    caseBoard.style.display = "grid";
-                    masterCase.style.display = "none";
-                })
             }
         });
         casePicks--;
@@ -134,12 +137,8 @@ function handleCaseClick(c) {
 
  
 function revealCase(caseNum, valueNum) {
-    const c = document.createElement("p");
-    const v = document.createElement("p");
-    c.innerText = caseNum;
-    v.innerText = valueNum;
-    masterCaseNum.appendChild(c);
-    masterCaseValue.appendChild(v);
+    mcC.innerText = caseNum;
+    mcV.innerText = valueNum;
 
 }
 
@@ -179,7 +178,5 @@ function leaveDeal() {
     }
 
 }
-
-
 
 startGame();

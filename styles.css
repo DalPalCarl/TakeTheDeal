@@ -10,7 +10,7 @@
 body {
     box-sizing: border-box;
     font-family: 'Work Sans', sans-serif;
-    background-color: gray;
+    background-color: rgb(44, 41, 41);
     padding: .5rem;
     margin-top: 8rem;
 }
@@ -136,6 +136,10 @@ hr {
     font-size: 5rem;
 }
 
+#mcV {
+    width: fit-content;
+}
+
 #masterCase > hr {
     position: inherit;
     overflow: hidden;
@@ -209,7 +213,6 @@ hr {
 
 .case-revealed {
     font-family: 'Work Sans', sans-serif;
-    animation: 1000ms ease-in 2000ms disappear forwards
 }
 
 .case-hidden {
@@ -218,16 +221,6 @@ hr {
 
 .valueFlip {
     transform: rotateX(90deg);
-}
-
-@keyframes disappear {
-    from {
-        opacity: 100%;
-    }
-
-    to {
-        opacity: 0%;
-    }
 }
 
 @keyframes revealCase {
