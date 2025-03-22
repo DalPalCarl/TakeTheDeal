@@ -60,6 +60,8 @@ hr {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    height: 40rem;
+    width: min(30rem);
 }
 
 #playerInfo {
@@ -137,7 +139,11 @@ hr {
 }
 
 #mcV {
-    width: fit-content;
+    font-weight: 700;
+}
+
+#mcC {
+    font-weight: 700;
 }
 
 #masterCase > hr {
@@ -165,17 +171,26 @@ hr {
 
 #takeBtn {
     background-color: green;
+    border-color: rgb(0, 97, 0);
 }
 
 #leaveBtn {
     background-color: red;
+    border-color: rgb(165, 0, 0);
 }
 
 .decision {
     font-family: 'Work Sans', sans-serif;
-    margin: .5rem;
-    padding: 2rem;
-    border-radius: 40%;
+    margin: .7rem;
+    width: 10rem;
+    height: 6rem;
+    border-radius: 10%;
+    box-shadow: inset 0 0 1rem 1rem rgba(0, 0, 0, 0.377);
+    transition: all 200ms ease-in-out;
+}
+
+.decision:hover {
+    transform: translateY(-8px);
 }
 
 .value {
@@ -188,10 +203,11 @@ hr {
     background-color: var(--color-light-orange);
     border-radius: 5px;
     border-width: 3px;
-    border-color: black;
+    border-color: var(--color-dark-orange);
     border-style: ridge;
     font-weight: 800;
-    box-shadow: inset 0 0 .6rem .3rem var(--color-dark-orange);
+    box-shadow: 
+        inset 0 0 .6rem .3rem var(--color-dark-orange);
     transition: transform 500ms ease-in-out;
 }
 
@@ -221,11 +237,6 @@ hr {
 
 .valueFlip {
     transform: rotateX(90deg);
-}
-
-.blur {
-    filter: blur(8px);
-    opacity: 50%;
 }
 
 @keyframes revealCase {

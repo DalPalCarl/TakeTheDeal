@@ -150,7 +150,7 @@ function flipValue(val) {
 }
 
 function bankerOffer() {
-    caseBoard.classList.add("blur");
+    caseBoard.style.display = "none";
     isOffering = true;
     offer = calculateOffer();
     instructionDisplay.innerText = `Banker offers $${offer.toLocaleString()}`;
@@ -172,7 +172,7 @@ function leaveDeal() {
         revealCase();
     }
     else{
-        caseBoard.classList.remove("blur");
+        caseBoard.style.display = "grid";
         decisionButtons.style.opacity = 0;
         casePicks = Math.max(Math.floor((26 - activeCases.length) / 5), 1);
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
