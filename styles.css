@@ -42,10 +42,9 @@ hr {
     color: var(--color-dark-orange);
 }
 
-#instructionContainer {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    justify-items: center;
+#instructions {
+    color: white;
+    font-size: 1.5rem;
 }
 
 #content {
@@ -60,8 +59,9 @@ hr {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 40rem;
-    width: min(30rem);
+    height: min(40rem);
+    width: min(28rem);
+    margin-bottom: 1rem;
 }
 
 #playerInfo {
@@ -98,11 +98,10 @@ hr {
     justify-content: center;
     align-items: flex-end;
     font-family: 'Work Sans', sans-serif;
-    width: 30rem;
-    height: 20rem;
+    width: max(30rem, 90%);
+    height: min(20rem, 60%);
     border: groove 7px black;
     border-radius: 10px;
-    box-shadow: inset 0 0 3rem 2rem var(--color-dark-grey);
     overflow: hidden;
 }
 
@@ -122,6 +121,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: inset 0 0 3rem 2rem var(--color-dark-grey);
     width: 30rem;
     height: 20rem;
     font-size: 12rem;
@@ -130,7 +130,8 @@ hr {
 #revealValue {
     position: inherit;
     display: flex;
-    background-color: rgb(175, 175, 175);
+    background-color: rgb(43, 43, 43);
+    color: white;
     justify-content: center;
     align-items: center;
     width: 30rem;
@@ -139,20 +140,15 @@ hr {
 }
 
 #mcV {
+    display: flex;
     font-weight: 700;
+    background-color: rgb(26, 26, 26);
+    width: 100%;
+    padding: 0 .5rem .5rem 0;
 }
 
 #mcC {
     font-weight: 700;
-}
-
-#masterCase > hr {
-    position: inherit;
-    overflow: hidden;
-    transform: rotateZ(90deg) translateX(9.25rem) translateY(15.1rem);
-    border: solid 4px black;
-    border-radius: 2rem;
-    width: 20rem;
 }
 
 #caseSelection {
@@ -179,8 +175,15 @@ hr {
     border-color: rgb(165, 0, 0);
 }
 
+#decisionButtons {
+    display: flex;
+    justify-content: center;
+    width: min(40rem, 100%);
+}
+
 .decision {
     font-family: 'Work Sans', sans-serif;
+    font-size: 2rem;
     margin: .7rem;
     width: 10rem;
     height: 6rem;
@@ -268,6 +271,18 @@ hr {
 
 @media (max-width: 580px) {
     #caseBoard{
-        grid-template-columns: repeat(6, minmax(auto, 1rem));
+        grid-template-columns: repeat(8, minmax(auto, 1rem));
+    }
+
+    .case {
+        font-size: 1.3rem;
+        font-weight: 700;
+        width: 4.5rem;
+        height: 3.5rem;
+        grid-column: span 2;
+        border-radius: 5px;
+        background-color: var(--color-light-grey);
+        box-shadow: inset 0 0 .5rem .2rem var(--color-dark-grey);
+    
     }
 }

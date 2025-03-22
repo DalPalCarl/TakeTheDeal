@@ -36,6 +36,7 @@ masterCase.addEventListener("animationend", () => {
     caseBoard.style.display = "grid";
     masterCase.style.display = "none";
     isAnimating = false;
+    instructions.style.visibility = "visible";
     if(casePicks == 0){
         bankerOffer();
     }
@@ -92,7 +93,7 @@ function startGame() {
     initButtons();
     takeDealBtn.addEventListener("click", takeDeal);
     leaveDealBtn.addEventListener("click", leaveDeal);
-    decisionButtons.style.opacity = 0;
+    decisionButtons.style.display = "none";
     values.forEach((v) => {
         valueSum += parseInt(v.id);
     });
@@ -117,6 +118,7 @@ function handleCaseClick(c) {
             if(v.id == vals[c.dataset.casenum - 1].id){
                 revealedVal = v;
                 c.style.opacity = 0;
+                instructions.style.visibility = "hidden";
                 caseBoard.style.display = "none";
                 masterCase.style.display = "flex";
                 revealCase(c.dataset.casenum, v.textContent);
@@ -154,7 +156,7 @@ function bankerOffer() {
     isOffering = true;
     offer = calculateOffer();
     instructionDisplay.innerText = `Banker offers $${offer.toLocaleString()}`;
-    decisionButtons.style.opacity = 100;
+    decisionButtons.style.display = "flex";
 }
 
 function takeDeal() {
@@ -166,6 +168,7 @@ function takeDeal() {
 function leaveDeal() {
     round++;
     isOffering = false;
+    decisionButtons.style.display = "none";
     const activeCases = document.querySelectorAll(".case-revealed");
     console.log(activeCases.length);
     if(activeCases.length == 1){
@@ -173,7 +176,6 @@ function leaveDeal() {
     }
     else{
         caseBoard.style.display = "grid";
-        decisionButtons.style.opacity = 0;
         casePicks = Math.max(Math.floor((26 - activeCases.length) / 5), 1);
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
     }
