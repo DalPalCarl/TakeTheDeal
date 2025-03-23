@@ -12,6 +12,9 @@ const masterCase = document.getElementById("masterCase");
 const masterCaseEdge = document.getElementById("masterCaseEdge");
 const masterCaseNum = document.getElementById("revealCase");
 const masterCaseValue = document.getElementById("revealValue");
+const bankerOfferContainer = document.getElementById("bankerOffer");
+const currentOffer = document.getElementById("currentOffer");
+const previousOffers = document.getElementById("previousOffers");
 const mcC = document.getElementById("mcC");
 const mcV = document.getElementById("mcV");
 const SHUFFLEPASSES = 3;
@@ -42,7 +45,6 @@ masterCase.addEventListener("animationend", () => {
     }
 });
 
-masterCase.style.display = "none";
 
 async function loadJson() {
     const response = await fetch("./instructions.json");
@@ -57,7 +59,7 @@ function initButtons() {
         c.addEventListener("click", () => {
             if(!isAnimating && !isOffering){
                 handleCaseClick(c);
-
+                
             }
         });
     });
@@ -91,6 +93,8 @@ function startGame() {
     casePicks = CASEPICKNUM;
     loadJson();
     initButtons();
+    masterCase.style.display = "none";
+    bankerOfferContainer.style.display = "none";
     takeDealBtn.addEventListener("click", takeDeal);
     leaveDealBtn.addEventListener("click", leaveDeal);
     decisionButtons.style.display = "none";
@@ -153,6 +157,7 @@ function flipValue(val) {
 
 function bankerOffer() {
     caseBoard.style.display = "none";
+    bankerOfferContainer.style.display = "block";
     isOffering = true;
     offer = calculateOffer();
     instructionDisplay.innerText = `Banker offers $${offer.toLocaleString()}`;
@@ -169,10 +174,11 @@ function leaveDeal() {
     round++;
     isOffering = false;
     decisionButtons.style.display = "none";
+    bankerOfferContainer.style.display = "none";
     const activeCases = document.querySelectorAll(".case-revealed");
     console.log(activeCases.length);
     if(activeCases.length == 1){
-        revealCase();
+        endGame();
     }
     else{
         caseBoard.style.display = "grid";
@@ -180,6 +186,10 @@ function leaveDeal() {
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
     }
 
+}
+
+function endGame() {
+    console.log("Game End");
 }
 
 startGame();

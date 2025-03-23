@@ -170,19 +170,51 @@ hr {
 }
 
 #takeBtn {
+    color: white;
     background-color: green;
     border-color: rgb(0, 97, 0);
+    text-shadow: 0 0 .5rem black;
 }
 
 #leaveBtn {
+    color: white;
     background-color: red;
     border-color: rgb(165, 0, 0);
+    text-shadow: 0 0 .5rem black;
 }
 
 #decisionButtons {
     display: flex;
     justify-content: center;
     width: min(40rem, 100%);
+}
+
+#bankerOffer {
+    width: min(30rem, 80%);
+}
+
+#previousOffers {
+    padding-left: 0;
+}
+
+#previousOffers li {
+    list-style: none;
+    background-color: grey;
+    color: white;
+    padding: 4px;
+    margin-bottom: 4px;
+    border: groove black;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+#currentOffer  {
+    background-color: #F2613F;
+    border: groove #9B3922;
+    border-radius: 10px;
+    color: black;
+    padding: 5px;
+    text-align: center;
 }
 
 .decision {
