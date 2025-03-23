@@ -4,7 +4,7 @@ const valueBoard = document.querySelector("#valueBoard");
 const cases = document.querySelectorAll(".case");
 const values = document.querySelectorAll(".value");
 const instructionDisplay = document.getElementById("instructions");
-const selectedCase = document.getElementById("caseSelection");
+const selectedCaseContainer = document.getElementById("caseSelection");
 const decisionButtons = document.getElementById("decisionButtons");
 const takeDealBtn = document.getElementById("takeBtn");
 const leaveDealBtn = document.getElementById("leaveBtn");
@@ -18,13 +18,13 @@ const previousOffers = document.getElementById("previousOffers");
 const mcC = document.getElementById("mcC");
 const mcV = document.getElementById("mcV");
 const SHUFFLEPASSES = 3;
-const CASEPICKNUM = 4;
+const CASEPICKNUM = 6;
 const ROUNDS = 10;
 
 let isAnimating = false;
 let isOffering = false;
 let firstCase = true;
-let selectedCaseNum;
+let selectedCase;
 let casePicks = CASEPICKNUM;
 let valueSum = 0;
 let round = 1;
@@ -109,11 +109,12 @@ function startGame() {
 function handleFirstCase(c) {
     firstCase = false;
     const playerCase = document.createElement("h3");
-    playerCase.innerText = c.dataset.casenum;
-    selectedCaseNum = c.dataset.casenum;
-    selectedCase.style.backgroundColor = "white";
+    // playerCase.innerText = c.dataset.casenum;
+    playerCase.innerText = c.innerText;
+    selectedCase = c;
+    selectedCaseContainer.style.backgroundColor = "white";
     c.style.opacity = 0;
-    selectedCase.appendChild(playerCase);
+    selectedCaseContainer.appendChild(playerCase);
     instructionDisplay.innerText = `Cases to select: ${casePicks}`;
 }
 
@@ -122,7 +123,7 @@ function handleCaseClick(c) {
         handleFirstCase(c);
     }
     else{
-        revealCase(c, vals[c.dataset.casenum-1]);
+        revealCase(c, vals[c.innerText-1]);
         casePicks--;
         valsLeft--;
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
@@ -138,7 +139,7 @@ function revealCase(c, v) {
     instructions.style.visibility = "hidden";
     caseBoard.style.display = "none";
     masterCase.style.display = "flex";
-    mcC.innerText = c.dataset.casenum;
+    mcC.innerText = c.innerText;
     mcV.innerText = v.textContent;
     c.classList.add("case-revealed");
     isAnimating = true;
@@ -164,9 +165,6 @@ function bankerOffer() {
 }
 
 function takeDeal() {
-    const profit = offer;
-    decisionButtons.style.display = "none";
-    instructionDisplay.innerText = "Your case contained:";
     endGame();
 }
 
@@ -176,22 +174,22 @@ function leaveDeal() {
     decisionButtons.style.display = "none";
     bankerOfferContainer.style.display = "none";
     const activeCases = document.querySelectorAll(".case-revealed");
-    console.log(activeCases);
     if(activeCases.length == 1){
         endGame();
     }
     else{
         caseBoard.style.display = "grid";
         instructions.style.visibility = "visible";
-        casePicks = Math.max(Math.floor((26 - activeCases.length) / 5), 1);
+        casePicks = Math.max(6 - round, 1);
         instructionDisplay.innerText = `Cases to select: ${casePicks}`;
         addToPreviousOffers();
     }
 }
 
 function endGame() {
-    console.log("Game End");
-
+    decisionButtons.style.display = "none";
+    instructionDisplay.innerText = "Your case contained:";
+    revealCase(selectedCase, vals[selectedCase.innerText-1])
 }
 
 function addToPreviousOffers() {
