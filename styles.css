@@ -61,7 +61,7 @@ hr {
     align-items: center;
     height: min(40rem);
     width: min(28rem);
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
 }
 
 #playerInfo {
@@ -191,6 +191,7 @@ hr {
 
 #bankerOffer {
     width: min(30rem, 80%);
+    color: white;
 }
 
 #previousOffers {
@@ -200,7 +201,6 @@ hr {
 #previousOffers li {
     list-style: none;
     background-color: grey;
-    color: white;
     padding: 4px;
     margin-bottom: 4px;
     border: groove black;
