@@ -18,8 +18,7 @@ const previousOffers = document.getElementById("previousOffers");
 const mcC = document.getElementById("mcC");
 const mcV = document.getElementById("mcV");
 const SHUFFLEPASSES = 3;
-// const CASEPICKNUM = 6;
-const CASEPICKNUM = 1;
+const CASEPICKNUM = 6;
 const CASES = 26;
 const ROUNDS = 10;
 
@@ -164,6 +163,7 @@ function flipValue(val) {
 function bankerOffer() {
     caseBoard.style.display = "none";
     bankerOfferContainer.style.display = "block";
+    instruction.style.display = "none";
     isOffering = true;
     offer = calculateOffer();
     currentOffer.innerText = `$${offer.toLocaleString()}`;
@@ -179,6 +179,7 @@ function leaveDeal() {
     isOffering = false;
     decisionButtons.style.display = "none";
     bankerOfferContainer.style.display = "none";
+    instruction.style.display = "block";
     const activeCases = document.querySelectorAll(".case-revealed");
     if(CASES - activeCases.length === 1){
         caseBoard.style.display = "grid";
