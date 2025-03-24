@@ -7,21 +7,24 @@
     --color-dark-grey: rgb(161, 161, 161);
 }
 
+html {
+    background-color: rgba(0, 11, 20, 0.938);
+    background-image: url(./bitmap.svg);
+}
+
 body {
     box-sizing: border-box;
     font-family: 'Work Sans', sans-serif;
-
-    background-color: rgb(44, 41, 41);
     padding: .5rem;
     margin-top: 8rem;
 }
 
 header {
+    font-family: 'Bruno Ace SC';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--color-black);
     
 }
 
@@ -41,6 +44,7 @@ hr {
     margin-bottom: 3rem;
     font-size: 3rem;
     color: var(--color-dark-orange);
+    text-shadow: 0 0 .8rem black;
 }
 
 #instructions {

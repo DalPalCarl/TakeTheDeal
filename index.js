@@ -184,7 +184,9 @@ function leaveDeal() {
 
 function endGame() {
     decisionButtons.style.display = "none";
-    instruction.innerText = "Your case contained:";
+    selectedCaseContainer.style.display = "none";
+    bankerOfferContainer.style.display = "none";
+    instruction.innerText = "Your case contained";
     revealCase(selectedCase, vals[selectedCase.innerText-1])
 }
 
