@@ -39,14 +39,17 @@ let revealedVal;
 
 masterCase.addEventListener("animationend", () => {
     flipValue(revealedVal);
-    caseBoard.style.display = "grid";
-    masterCase.style.display = "none";
-    isAnimating = false;
-    if(casePicks == 0){
-        bankerOffer();
-    }
-    else {
-        instruction.style.visibility = "visible";
+    const activeCases = document.querySelectorAll(".case-revealed");
+    if(CASES - activeCases.length > 1){
+        caseBoard.style.display = "grid";
+        masterCase.style.display = "none";
+        isAnimating = false;
+        if(casePicks == 0){
+            bankerOffer();
+        }
+        else {
+            instruction.style.visibility = "visible";
+        }
     }
 });
 
@@ -138,7 +141,16 @@ function revealCase(c, v) {
     c.classList.add("case-revealed");
     isAnimating = true;
     valueSum -= parseInt(v.id);
+}
 
+function revealSelectedCase(c, v) {
+    revealedVal = v;
+    caseBoard.style.display = "none";
+    masterCase.style.display = "flex";
+    mcC.innerText = c.innerText;
+    mcV.innerText = v.textContent;
+    c.classList.add("case-revealed");
+    isAnimating = true;
 }
 
 function flipValue(val) {
@@ -186,8 +198,9 @@ function endGame() {
     decisionButtons.style.display = "none";
     selectedCaseContainer.style.display = "none";
     bankerOfferContainer.style.display = "none";
+    instruction.style.visibility = "visible";
     instruction.innerText = "Your case contained";
-    revealCase(selectedCase, vals[selectedCase.innerText-1])
+    revealSelectedCase(selectedCase, vals[selectedCase.innerText-1])
 }
 
 function addToPreviousOffers() {
