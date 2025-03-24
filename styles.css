@@ -10,6 +10,7 @@
 body {
     box-sizing: border-box;
     font-family: 'Work Sans', sans-serif;
+
     background-color: rgb(44, 41, 41);
     padding: .5rem;
     margin-top: 8rem;
@@ -44,7 +45,8 @@ hr {
 
 #instructions {
     color: white;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-family: 'Bruno Ace SC', sans-serif;
 }
 
 #content {
@@ -191,26 +193,31 @@ hr {
 
 #bankerOffer {
     width: min(30rem, 80%);
+    font-family: 'Bruno Ace SC', sans-serif;
     color: white;
 }
 
 #previousOffers {
     padding-left: 0;
+    font-weight: 100;
 }
 
 #previousOffers li {
     list-style: none;
     background-color: grey;
+    font-family: 'Work Sans', sans-serif;
     padding: 4px;
     margin-bottom: 4px;
     border: groove black;
     border-radius: 5px;
     font-weight: 700;
+    text-align: center;
 }
 
 #currentOffer  {
     background-color: #F2613F;
     border: groove #9B3922;
+    font-family: 'Work Sans', sans-serif;
     border-radius: 10px;
     color: black;
     padding: 5px;

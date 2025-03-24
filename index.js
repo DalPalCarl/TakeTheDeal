@@ -3,7 +3,7 @@ const caseBoard = document.querySelector("#caseBoard");
 const valueBoard = document.querySelector("#valueBoard");
 const cases = document.querySelectorAll(".case");
 const values = document.querySelectorAll(".value");
-const instructionDisplay = document.getElementById("instructions");
+const instruction = document.getElementById("instructions");
 const selectedCaseContainer = document.getElementById("caseSelection");
 const decisionButtons = document.getElementById("decisionButtons");
 const takeDealBtn = document.getElementById("takeBtn");
@@ -18,7 +18,9 @@ const previousOffers = document.getElementById("previousOffers");
 const mcC = document.getElementById("mcC");
 const mcV = document.getElementById("mcV");
 const SHUFFLEPASSES = 3;
-const CASEPICKNUM = 6;
+// const CASEPICKNUM = 6;
+const CASEPICKNUM = 1;
+const CASES = 26;
 const ROUNDS = 10;
 
 let isAnimating = false;
@@ -44,16 +46,9 @@ masterCase.addEventListener("animationend", () => {
         bankerOffer();
     }
     else {
-        instructions.style.visibility = "visible";
+        instruction.style.visibility = "visible";
     }
 });
-
-
-async function loadJson() {
-    const response = await fetch("./instructions.json");
-    const instructions = await response.json();
-    instructionDisplay.innerText = instructions.newGame;
-}
 
 function initButtons() {
     shuffle();
@@ -86,16 +81,16 @@ function shuffle() {
 // -Volatility: the difference between the largest value and the smallest value
 // -Avg:
 function calculateOffer() {
-    const ev = Math.round(valueSum/valsLeft);
-    const calculation = ev * (round/roundsLeft);
-    return calculation;
+    const ev = valueSum/valsLeft;
+    const calculation = Math.round(ev * (round/roundsLeft));
+    return calculation - (calculation % (calculation > 10000 ? 1000 : 100));
 }
 
 
 function startGame() {
     casePicks = CASEPICKNUM;
-    loadJson();
     initButtons();
+    instruction.innerText = "Choose your case"
     masterCase.style.display = "none";
     bankerOfferContainer.style.display = "none";
     takeDealBtn.addEventListener("click", takeDeal);
@@ -109,13 +104,12 @@ function startGame() {
 function handleFirstCase(c) {
     firstCase = false;
     const playerCase = document.createElement("h3");
-    // playerCase.innerText = c.dataset.casenum;
     playerCase.innerText = c.innerText;
     selectedCase = c;
     selectedCaseContainer.style.backgroundColor = "white";
     c.style.opacity = 0;
     selectedCaseContainer.appendChild(playerCase);
-    instructionDisplay.innerText = `Cases to select: ${casePicks}`;
+    instruction.innerText = `Cases to select: ${casePicks}`;
 }
 
 function handleCaseClick(c) {
@@ -126,7 +120,7 @@ function handleCaseClick(c) {
         revealCase(c, vals[c.innerText-1]);
         casePicks--;
         valsLeft--;
-        instructionDisplay.innerText = `Cases to select: ${casePicks}`;
+        instruction.innerText = `Cases to select: ${casePicks}`;
     }
     c.setAttribute("disabled", "true");
     
@@ -136,7 +130,7 @@ function handleCaseClick(c) {
 function revealCase(c, v) {
     revealedVal = v;
     c.style.opacity = 0;
-    instructions.style.visibility = "hidden";
+    instruction.style.visibility = "hidden";
     caseBoard.style.display = "none";
     masterCase.style.display = "flex";
     mcC.innerText = c.innerText;
@@ -174,27 +168,29 @@ function leaveDeal() {
     decisionButtons.style.display = "none";
     bankerOfferContainer.style.display = "none";
     const activeCases = document.querySelectorAll(".case-revealed");
-    if(activeCases.length == 1){
+    if(CASES - activeCases.length === 1){
+        caseBoard.style.display = "grid";
+        instruction.style.visibility = "visible";
         endGame();
     }
     else{
         caseBoard.style.display = "grid";
-        instructions.style.visibility = "visible";
+        instruction.style.visibility = "visible";
         casePicks = Math.max(6 - round, 1);
-        instructionDisplay.innerText = `Cases to select: ${casePicks}`;
+        instruction.innerText = `Cases to select: ${casePicks}`;
         addToPreviousOffers();
     }
 }
 
 function endGame() {
     decisionButtons.style.display = "none";
-    instructionDisplay.innerText = "Your case contained:";
+    instruction.innerText = "Your case contained:";
     revealCase(selectedCase, vals[selectedCase.innerText-1])
 }
 
 function addToPreviousOffers() {
     const newItem = document.createElement("li");
-    newItem.innerText = `${offer.toLocaleString()}`;
+    newItem.innerText = `$${offer.toLocaleString()}`;
     let firstChild = previousOffers.firstChild;
     previousOffers.insertBefore(newItem, firstChild);
 }
